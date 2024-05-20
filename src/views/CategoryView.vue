@@ -3,5 +3,5 @@ import ProductsPage from '@/components/ProductsPage.vue'
 </script>
 
 <template>
-  <ProductsPage :category-id="0" />
+  <ProductsPage :category-id="Number($route.params.id)" />
 </template>

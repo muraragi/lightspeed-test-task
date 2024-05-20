@@ -1,16 +1,21 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
+import { Store } from 'lucide-vue-next'
+import CartButton from './components/CartButton.vue'
+import { Toaster } from './components/ui/toast'
 </script>
 
 <template>
-  <header>
-    <div class="wrapper">
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
+  <header class="border-b flex items-center px-12 h-16">
+    <nav class="flex justify-between items-center w-full">
+      <RouterLink to="/"><Store :size="32" /></RouterLink>
+      <CartButton />
+    </nav>
   </header>
 
-  <RouterView />
+  <div class="px-12 py-6 h-[calc(100vh-5.5rem)]">
+    <RouterView :key="$route.path" />
+  </div>
+
+  <Toaster />
 </template>
