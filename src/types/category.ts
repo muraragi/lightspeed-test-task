@@ -5,5 +5,5 @@ export type Category = {
 }
 
 export type GetCategoriesReqParams = {
-  parentCategoryId: number
+  parent: number
 }

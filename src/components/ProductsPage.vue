@@ -18,7 +18,7 @@ const dataLoading = ref(true)
 
 onMounted(async () => {
   const promises: [Promise<Category[]>, Promise<Product[]>] = [
-    getCategories({ parentCategoryId: props.categoryId }),
+    getCategories({ parent: props.categoryId }),
     getProducts(props.categoryId ? { categories: `${props.categoryId}` } : undefined)
   ]
   ;[categories.value, products.value] = await Promise.all(promises)
@@ -29,16 +29,18 @@ onMounted(async () => {
 
 <template>
   <main v-if="!dataLoading">
-    <h2>{{ props.categoryId ? 'Подкатегории' : 'Категории' }}</h2>
+    <template v-if="categories?.length">
+      <h2>{{ props.categoryId ? 'Подкатегории' : 'Категории' }}</h2>
 
-    <div class="flex gap-4 flex-wrap my-6">
-      <CategoryCard
-        v-for="category in categories"
-        :key="category.id"
-        :category="category"
-        class="basis-72"
-      />
-    </div>
+      <div class="flex gap-4 flex-wrap my-6">
+        <CategoryCard
+          v-for="category in categories"
+          :key="category.id"
+          :category="category"
+          class="basis-72"
+        />
+      </div>
+    </template>
 
     <h2>{{ props.categoryId ? 'Товары' : 'Популярные товары' }}</h2>
 
